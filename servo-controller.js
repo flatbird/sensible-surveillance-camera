@@ -21,7 +21,7 @@ ServoController.prototype.setAngle = function(angle) {
 		angle = 180;
 	}
 	// 24 ~ 115
-	var value = angle / 2 + 24;
+	var value = Math.floor(angle / 2 + 24);
 	console.log('wpi.pwmWrite(pin=' + this.pin + ', value=' + value + ')');
 	wpi.pwmWrite(this.pin, value);
 }
