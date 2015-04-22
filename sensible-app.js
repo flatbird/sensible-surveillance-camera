@@ -1,6 +1,5 @@
-// For running USB camera:
-//   apt-get install motion
-//   sudo service motion start
+//
+// using mjpg_streamer to run webcam
 //
 var	dgram = require ("dgram");
 var	fs = require ("fs");
@@ -74,7 +73,7 @@ function onCamServerGet(request, callback) {
   var response = {
   	type: 'json',
   	object: {
-  		url: 'http://'+ addr + ':8081/'
+  		url: 'http://'+ addr + ':8080/?action=stream'
   	}
   };
  	callback(response);
