@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
+    <title>監視カメラ</title>
+    <style>
+    </style>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <section>
+      <label for="pan">Pan:</label>
+      <input id="pan" type="range" min="0" max="180" value="90">
+      <span>Tilt:</span>
+      <input id="tilt" type="range" min="0" max="180" value="90">
+    </section>
+    <iframe id="camera-frame"></iframe>
+  </body>
+</html>

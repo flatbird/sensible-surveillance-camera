@@ -1,0 +1,9 @@
+{
+	"_comment" : "config items, reserved names and types",
+
+	"name" : "Surveillance Camera",
+	"type" : "_sensible._tcp.local",
+	"port" : 3080,
+	"description" : "Survo + Camera",
+	"hostname" : "surveillancecamera.local"
+}
