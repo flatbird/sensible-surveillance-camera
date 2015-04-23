@@ -26,6 +26,11 @@ app.prototype.onBeforeStart = onBeforeStart;
 app.prototype.onAfterStart = onAfterStart;
 app.prototype.servo_set = onServoSet; // /servo/set?pan=nnn&tilt=nnn
 app.prototype.camserver_get = onCamServerGet; // /camserver/get
+// skip mDNS
+app.prototype.start = function(inCallback) {
+        this.startHTTPServer();
+        inCallback.call(this);
+};
 
 sensible.ApplicationFactory.createApplication(function (error) {
 	if (error) {
