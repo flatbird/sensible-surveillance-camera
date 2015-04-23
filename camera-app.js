@@ -8,6 +8,7 @@ var os = require ("os");
 var path = require ("path")
 var url = require ("url");
 var servo = require('./servo-controller');
+var camera = require('./run-camera');
 
 var PIN_PAN  = 18; // GPIO18
 var PIN_TILT = 13; // GPIO13
@@ -48,6 +49,9 @@ function onAfterStart(callback) {
 	console.log('sensible app started');
 	panController = new servo.ServoController(PIN_PAN);
 	tiltController = new servo.ServoController(PIN_TILT);
+
+	camera.initCamera();
+
 	callback();
 }
 
@@ -73,7 +77,8 @@ function onCamServerGet(request, callback) {
 	var tiltValue = request.parameters.tilt;
 	var success = true;
 
-	var addr = gSensibleApplication.mdns.strategy.getIPAddress();
+	//var addr = gSensibleApplication.mdns.strategy.getIPAddress();
+	var addr = sensible.node.Strategy.prototype.getIPAddress();
 
 	var response = {
   		type: 'json',
