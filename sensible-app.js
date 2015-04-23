@@ -1,23 +1,23 @@
 //
 // using mjpg_streamer to run webcam
 //
-var	dgram = require ("dgram");
-var	fs = require ("fs");
-var	http = require ("http");
-var	os = require ("os");
+var dgram = require ("dgram");
+var fs = require ("fs");
+var http = require ("http");
+var os = require ("os");
 var path = require ("path")
-var	url = require ("url");
+var url = require ("url");
 var servo = require('./servo-controller');
 
 var PIN_PAN  = 18; // GPIO18
-var PIN_TILT = 24; // GPIO24
+var PIN_TILT = 13; // GPIO13
 
 var panController;
 var tiltController;
 
 // load sensible
 var baseDir = path.dirname(process.argv[1]);
-var	sensibleContent = fs.readFileSync(path.join(baseDir, 'sensible.js'));
+var sensibleContent = fs.readFileSync(path.join(baseDir, 'sensible.js'));
 eval(sensibleContent.toString());
 
 var app = sensible.node.Application;
@@ -48,33 +48,33 @@ function onAfterStart(callback) {
 
 function onServoSet(request, callback) {
 	console.log('onServoSet()');
-  var panValue = request.parameters.pan;
-  var tiltValue = request.parameters.tilt;
-  var success = true;
+	var panValue = request.parameters.pan;
+	var tiltValue = request.parameters.tilt;
+	var success = true;
 
-  panController.setAngle(panValue);
+	panController.setAngle(panValue);
  	tiltController.setAngle(tiltValue);
 
-  var response = {
-    type: 'json',
-    object: { success: success }
-  };
-  callback(response);
+	var response = {
+		type: 'json',
+		object: { success: success }
+	};
+	callback(response);
 }
 
 function onCamServerGet(request, callback) {
 	console.log('onCamServerGet()');
-  var panValue = request.parameters.pan;
-  var tiltValue = request.parameters.tilt;
-  var success = true;
+	var panValue = request.parameters.pan;
+	var tiltValue = request.parameters.tilt;
+	var success = true;
 
 	var addr = gSensibleApplication.mdns.strategy.getIPAddress();
 
-  var response = {
-  	type: 'json',
-  	object: {
-  		url: 'http://'+ addr + ':8080/?action=stream'
-  	}
-  };
+	var response = {
+  		type: 'json',
+  		object: {
+  			url: 'http://'+ addr + ':8080/?action=stream'
+  		}
+  	};
  	callback(response);
 }

@@ -1,15 +1,14 @@
 (function () {
 
-var wpi = require('wiring-pi');
+var rpio = require('rpio');
 
-wpi.wiringPiSetupGpio();
-wpi.pwmSetMode(wpi.PWM_MODE_MS);
-wpi.pwmSetClock(400);
-wpi.pwmSetRange(1024);
+rpio.pwmSetClockDivider(512);
 
 // constructor
 var ServoController = function(pin) {
 	this.pin = pin;
+	rpio.setFunction(pin, rpio.PWM);
+	rpio.pwmSetRange(pin, 1024);
 	console.log('ServoController:', pin);
 };
 
@@ -22,8 +21,8 @@ ServoController.prototype.setAngle = function(angle) {
 	}
 	// 24 ~ 115
 	var value = Math.floor(angle / 2 + 24);
-	console.log('wpi.pwmWrite(pin=' + this.pin + ', value=' + value + ')');
-	wpi.pwmWrite(this.pin, value);
+	console.log('rpio.pwmSetData(pin=' + this.pin + ', value=' + value + ')');
+	rpio.pwmSetData(this.pin, value);
 }
 
 exports.ServoController = ServoController;
