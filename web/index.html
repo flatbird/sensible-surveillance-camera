@@ -3,8 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1">
-    <title>監視カメラ</title>
+    <title>首ふりカメラ</title>
     <style>
+      label {
+        display: inline-block;
+        width: 25px;
+      }
+      input[type="range"] {
+        width: 80%;
+        height: 30px;
+        margin-top: 5px;
+      }
+      #camera-frame {
+        width: 100%;
+        margin-top: 10px;
+      }
     </style>
     <script src="app.js" defer></script>
   </head>
@@ -12,7 +25,9 @@
     <section>
       <label for="pan">Pan:</label>
       <input id="pan" type="range" min="0" max="180" value="90">
-      <span>Tilt:</span>
+    </section>
+    <section>
+      <label for="tilt">Tilt:</label>
       <input id="tilt" type="range" min="0" max="180" value="90">
     </section>
     <img id="camera-frame"></img>
